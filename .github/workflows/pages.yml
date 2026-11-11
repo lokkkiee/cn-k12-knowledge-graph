@@ -30,7 +30,12 @@ jobs:
           cp -r index.html manifest.webmanifest sw.js assets children data diagnose explore _site/
           touch _site/.nojekyll
 
+      # enablement=true：仓库尚未开启 Pages 时，由此步骤自动创建 Pages 站点
+      # （默认 false，否则 configure-pages 会因 GET Pages site 返回 404 直接失败）
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+          token: ${{ github.token }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
